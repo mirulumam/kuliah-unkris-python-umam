@@ -1,5 +1,5 @@
 import re
-from .infixPostfix import infixToPostfix
+from .infixPostfix import infixToPostfix, postFixEvaluation
 
 class Lanjutan:
 
@@ -20,4 +20,8 @@ class Lanjutan:
         print(infixToPostfix("A * B + C * D"))
         print(infixToPostfix("( A + B ) * C - ( D - E ) * ( F + G )"))
         print(infixToPostfix("(A+B)^C-((D+E)-(B*F))"))
+
+    # 2.6 Tugas Lanjutan (5)
+    def postFixEvaluationResult(self):
+        print(postFixEvaluation("7 8 + 3 2 + /"))
 
