@@ -29,6 +29,10 @@ class Stack:
         else:
             return False
 
+NUMBERS = "1234567890"
+LETTERS = "QWERTYUIOPASDFGHJKLZXCVBNM"
+OPERATORS = "^*/+-"
+
 def infixToPostfix(infixexpr):
     infixexpr = infixexpr.replace(" ", "").replace("", " ")[1: -1]
     # [+-]*: any sequence of these two characters, which serve as unary operators. + is in that sense a useless operator, but it is allowed.
@@ -51,7 +55,7 @@ def infixToPostfix(infixexpr):
     postfixList = []
     tokenList = infixexpr.split()
     for token in tokenList:
-        if token in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" or token in "0123456789":
+        if token in LETTERS + NUMBERS:
             postfixList.append(token)
         elif token == '(':
             opStack.push(token)
@@ -80,14 +84,14 @@ def doMath(op, op1, op2):
     else:
         return op1 - op2
 
-def postFixEvaluation(postfixExpr):
+def evaluation(expression, tokenType):
     operandStack = Stack()
-    tokenList = postfixExpr.split()
+    tokenList = expression.split()
 
     for token in tokenList:
-        if token in "0123456789":
+        if token in tokenType:
             operandStack.push(int(token))
-        elif token in "^*/+-":
+        elif token in OPERATORS:
             operand2 = operandStack.pop()
             operand1 = operandStack.pop()
             result = doMath(token, operand1, operand2)
@@ -96,3 +100,9 @@ def postFixEvaluation(postfixExpr):
             return "Token tidak valid: {0}".format(token)
 
     return operandStack.pop()
+
+def postFixEvaluation(postfixExpr):
+    return evaluation(postfixExpr, NUMBERS)
+
+def infixEvaluation(infixExpr):
+    return evaluation(infixExpr, NUMBERS)
