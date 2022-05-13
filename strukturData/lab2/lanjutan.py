@@ -1,5 +1,6 @@
 import re
 from .infixPostfix import evaluation, infixToPostfix, postFixEvaluation, infixEvaluation
+from .queue import Queue, doQueue, doDequeue
 
 class Lanjutan:
 
@@ -33,3 +34,18 @@ class Lanjutan:
         print("Infix to Postfix", inToPost)
         evaluation = infixEvaluation(inToPost)
         print("Evaluation", evaluation)
+
+    # 2.6 Tugas Lanjutan (8)
+    def queueDequeue(self):
+        q = doQueue(Queue(), 10000)
+        d = doDequeue(q)
+        if q.getTime() < d.getTime():
+            o1 = "Queue"
+            s = "lebih cepat"
+            o2 = "Dequeue"
+        else:
+            o1 = "Dequeue"
+            s = "lebih cepat"
+            o2 = "Queue"
+        print("Kseimpulan: {0} {1} daripada {2}".format(o1, s, o2))
+        
