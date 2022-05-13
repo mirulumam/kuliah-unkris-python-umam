@@ -111,19 +111,3 @@ class F:
     # str()             repr()
     # a = F(1, 2)       a = F(1, 2)
     # str(a) -> 1/2     repr(a) -> <__main__.F object at 0x7f753c6fad90>
-
-    def tugasPendahuluan(self):
-        print("numerator \t", self.getNum())
-        print("denominator \t", self.getDen())
-
-    def tugasLanjutan2(self, other):
-        print("a - b \t\t", (self-other))
-        print("a * b \t\t", (self*other))
-        print("a / b \t\t", (self/other))
-
-    def tugasLanjutan3(self, o):
-        print("a > b \t", (self>o))
-        print("a >= b \t", (self>=o))
-        print("a < b \t", (self<o))
-        print("a <= b \t", (self<=o))
-        print("a != b \t", (self!=o))
