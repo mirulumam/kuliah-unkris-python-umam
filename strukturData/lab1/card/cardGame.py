@@ -1,8 +1,8 @@
 # modified from: https://gist.github.com/amankharwal/2e97d2792d997203e6cee493c2f51773#file-card-game
 
-from card import Card
-from deck import Deck
-from player import Player
+from .card import Card
+from .deck import Deck
+from .player import Player
 
 class Game:
     def __init__(self, name1, name2):

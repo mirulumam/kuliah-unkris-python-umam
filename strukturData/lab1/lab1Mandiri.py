@@ -1,4 +1,6 @@
 from strukturData.lab1.F import F
+from strukturData.lab1.card.cardGame import Game
+from strukturData.lab1.sudoku import showSudokuResult
 
 
 def tugasMandiri5():
@@ -16,3 +18,9 @@ def tugasMandiri5():
     except ValueError as e:
         print("ERROR", e.args[0])
 
+def tugasMandiri9():
+    g = Game("Ganyu", "Shenhe")
+    g.play_game()
+
+def tugasMandiri10():
+    showSudokuResult()
