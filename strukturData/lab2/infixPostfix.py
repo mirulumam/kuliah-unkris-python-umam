@@ -1,7 +1,7 @@
 # please install regex package first from command line
 # command to install:
 # python -m pip install regex
-import regex
+import ast
 
 class Stack:
     def __init__(self):
@@ -34,14 +34,9 @@ LETTERS = "QWERTYUIOPASDFGHJKLZXCVBNM"
 OPERATORS = "^*/+-"
 
 def infixToPostfix(infixexpr):
-    infixexpr = infixexpr.replace(" ", "").replace("", " ")[1: -1]
-    # [+-]*: any sequence of these two characters, which serve as unary operators. + is in that sense a useless operator, but it is allowed.
-    # [\d\w\s]: any non-empty sequence of digits, words, and whitespace. representing an unsigned integer
-    # (?1): recursion. This will use the whole regular expression -- except for the ^ and $ anchors! -- in a recursive way. With the surrounding, literal parentheses, this allows for expression nesting.
-    # [+^*/-]: any binary operator (extend with more operators as needed)
-    # (?2): to match the second operand of a binary operator, re-using the same pattern as was used to match the first operand.
-    result = regex.match(r"^(([+-]*[\d\w\s\(\)]+|\((?1)\))([+^*/-](?2))*)$", infixexpr)
-    if result is None:
+    try:
+        ast.parse(infixexpr)
+    except:
         return "Invalid Infix"
 
     prec = {}
