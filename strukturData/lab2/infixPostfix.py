@@ -2,6 +2,7 @@
 # command to install:
 # python -m pip install regex
 import ast
+import regex
 
 class Stack:
     def __init__(self):
@@ -34,9 +35,15 @@ LETTERS = "QWERTYUIOPASDFGHJKLZXCVBNM"
 OPERATORS = "^*/+-"
 
 def infixToPostfix(infixexpr):
-    try:
-        ast.parse(infixexpr)
-    except:
+    infixexpr = infixexpr.replace(" ", "").replace("", " ")[1: -1]
+    # [+-]*: any sequence of these two characters, which serve as unary operators. + is in that sense a useless operator, but it is allowed.
+    # [\d\w\s]: any non-empty sequence of digits, words, and whitespace. representing an unsigned integer
+    # (?1): recursion. This will use the whole regular expression -- except for the ^ and $ anchors! -- in a recursive way. With the surrounding, literal parentheses, this allows for expression nesting.
+    # [+^*/-]: any binary operator (extend with more operators as needed)
+    # (?2): to match the second operand of a binary operator, re-using the same pattern as was used to match the first operand.
+    
+    result = regex.match(r"^(([+-]*[\d\w\s\(\)]+|\((?1)\))([+^*/-](?2))*)$", infixexpr)
+    if result is None:
         return "Invalid Infix"
 
     prec = {}
@@ -49,16 +56,21 @@ def infixToPostfix(infixexpr):
     opStack = Stack()
     postfixList = []
     tokenList = infixexpr.split()
+    opener = 0
     for token in tokenList:
         if token in LETTERS + NUMBERS:
             postfixList.append(token)
         elif token == '(':
+            opener += 1
             opStack.push(token)
         elif token == ')':
+            if opener == 0:
+                return "Invalid Infix"
             topToken = opStack.pop()
             while topToken != '(':
                 postfixList.append(topToken)
                 topToken = opStack.pop()
+            opener -= 1
         else:
             while (not opStack.isempty()) and (prec[opStack.peek()] >= prec[token]): postfixList.append(opStack.pop())
             opStack.push(token)
