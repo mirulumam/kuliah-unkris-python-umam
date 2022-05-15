@@ -2,5 +2,7 @@ Hi, saya [Muhammad Chairul Umam](https://chairulumam.com), mahasiswa Universitas
 
 ---
 Mata kuliah yang ada di repo ini:
+* Kecerdasan Buatan
+  * Tugas Ant Colony
 * Struktur Data:
   * UTS (Lab. 1 - 2)
